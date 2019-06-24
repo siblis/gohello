@@ -33,7 +33,6 @@ func Calculate(expr string) (float64, error) {
 	//  exprNode()
 	// }
 	root, err := parser.ParseExpr(expr)
-	fmt.Printf(">>> %s \n", root)
 
 	if err != nil {
 		return -1, err
@@ -146,6 +145,9 @@ func eval(expr ast.Expr) (float64, error) {
 	switch expr.(type) {
 	case *ast.BasicLit:
 		return basic(expr.(*ast.BasicLit))
+		// Бинарные выражения
+	case *ast.BinaryExpr:
+		return binary(expr.(*ast.BinaryExpr))
 
 	// Вложенные вычисления
 	case *ast.ParenExpr:
@@ -185,6 +187,7 @@ func basic(lit *ast.BasicLit) (float64, error) {
 	}
 }
 
+//Вычисление выражений вида a operation b
 func binary(expr *ast.BinaryExpr) (ret float64, err error) {
 	x, err1 := eval(expr.X)
 	y, err2 := eval(expr.Y)
@@ -207,7 +210,7 @@ func binary(expr *ast.BinaryExpr) (ret float64, err error) {
 			ret = float64(int64(x) & int64(y))
 		case token.OR:
 			ret = float64(int64(x) | int64(y))
-		case token.XOR:
+		case token.XOR: //В Go XOR ^, а для нас это возведень в степень
 			ret = math.Pow(x, y)
 		default:
 			err = errors.New("Неизвестный бинарный оператор")

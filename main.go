@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Calculator. Input exit for exit")
 	input := ""
 	for {
 		fmt.Print("> ")
