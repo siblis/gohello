@@ -1,0 +1,30 @@
+package main
+
+import (
+	"fmt"
+	"math/cmplx"
+)
+
+func sqrtec() {
+	var A, B, C float64
+	var a, b, c, sqrtD, x1, x2 complex128
+	//a = 40
+	///	b = 4
+	//	c = 1
+	fmt.Print("A=")
+	fmt.Scanln(&A)
+	fmt.Print("B=")
+	fmt.Scanln(&B)
+	fmt.Print("C=")
+	fmt.Scanln(&C)
+	a = complex(A, 0)
+	b = complex(B, 0)
+	c = complex(C, 0)
+
+	sqrtD = cmplx.Sqrt(cmplx.Pow(b, 2) - 4*a*c)
+
+	x1 = (-b + sqrtD) / (2 * a)
+	x2 = (-b - sqrtD) / (2 * a)
+	fmt.Println(x1, x2)
+
+}

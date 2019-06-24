@@ -22,9 +22,6 @@ func calc() {
 
 		// Ввод второго числа
 		secondNum := enterNumber("Введите второе число: ")
-		if secondNum == 0 {
-			panic("division by zero")
-		}
 
 		fmt.Printf("Результат: %v \n", calculate(firstNum, action, secondNum))
 	}
