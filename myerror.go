@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 )
@@ -30,6 +31,12 @@ func runWithOk() *MyError {
 
 //include in your main() myerrordemo()
 func myerrordemo() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Println(r)
+		}
+	}()
+
 	if err := runWithError(); err != nil {
 		fmt.Println(err)
 	}
@@ -39,8 +46,9 @@ func myerrordemo() {
 
 	file, err3 := os.Open("nevermind")
 	if err3 != nil {
-		fmt.Println(err3)
+		panic(err3)
 	} else {
-		file.Close()
+		defer file.Close()
 	}
+	// work with file
 }
